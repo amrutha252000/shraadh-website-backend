@@ -1,27 +1,23 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
 from datetime import datetime
 
 app = Flask(__name__)
 CORS(app) # This allows your website to talk to this backend
 
 # --- Google Sheets Setup ---
-scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
-         "https://www.googleapis.com/auth/drive.file", "https://www.googleapis.com/auth/drive"]
-
-creds = ServiceAccountCredentials.from_json_keyfile_name("credentials.json", scope)
-client = gspread.authorize(creds)
-
-# --- IMPORTANT: Enter your Google Sheet name here ---
-sheet = client.open("Shraadh Calculator Submissions").sheet1
+gc = gspread.service_account(filename='sb.json')
+sh = gc.open("Shraadh Calculator Submissions")
+worksheet = sh.get_worksheet(0)
 
 @app.route('/submit', methods=['POST'])
 def submit_form():
     try:
+       
         data = request.get_json()
-
+        print(data)
+#validation rayali
         # Prepare the row data
         new_row = [
             data.get('name'),
@@ -34,7 +30,7 @@ def submit_form():
         ]
 
         # Append the new row to the sheet
-        sheet.append_row(new_row)
+        worksheet.append_row(new_row)
 
         return jsonify({"status": "success", "message": "Data saved successfully!"}), 200
 
