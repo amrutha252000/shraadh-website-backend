@@ -62,7 +62,7 @@ def submit_form():
         # Append the new row to the sheet
         sheet.append_row(new_row)
  
-        prompt = 'Based on Vedic astrology (Panchang), for a person who passed away on 01/01/2001 at 11:11 AM in goa, calculate the following for the year 2025: 1. The name of the annual Shraadh tithi (e.g., "Krishna Paksha, Ashtami"). 2. The exact Gregorian date and time in 2025 for that annual Shraadh tithi, formatted as "MM/DD/YYYY at HH:MM AM/PM". 3. The single corresponding date from the Pitru Paksha 2025 calendar (September 7 to September 21, 2025) that matches the tithi, formatted as "MM/DD/YYYY (Name of Shraddha)". Provide the answer as a JSON object with three keys. For example: { "annualTithiName": "Ashadha Shukla Shashthi", "annualTithiDateTime": "06/07/2025 at 10:45 AM", "pitruPakshaDate": "12/09/2025 (Shashthi Shraddha)"' 
+        prompt = 'Based on Vedic astrology (Panchang), for a person who passed away on {death_date} at {death_time} in {death_place}, calculate the following for the year 2025: 1. The name of the annual Shraadh tithi (e.g., "Krishna Paksha, Ashtami"). 2. The exact Gregorian date and time in 2025 for that annual Shraadh tithi, formatted as "MM/DD/YYYY at HH:MM AM/PM". 3. The single corresponding date from the Pitru Paksha 2025 calendar (September 7 to September 21, 2025) that matches the tithi, formatted as "MM/DD/YYYY (Name of Shraddha)". Provide the answer as a JSON object with three keys. For example: { "annualTithiName": "Ashadha Shukla Shashthi", "annualTithiDateTime": "06/07/2025 at 10:45 AM", "pitruPakshaDate": "12/09/2025 (Shashthi Shraddha)"' 
         chatHistory = []
         chatHistory.append({"role": "user", "parts": [{ "text": prompt }] })
         
