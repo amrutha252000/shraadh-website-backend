@@ -117,7 +117,7 @@ def submit_form():
             print(f"An error occurred: {e}")
 
         # return jsonify({"status": "success", "message": "Data saved successfully!"})  , 200
-        return ans
+        return jsonify(ans), 200
 
     except Exception as e:
         print(f"An error occurred during form submission: {e}")
