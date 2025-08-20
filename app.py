@@ -115,6 +115,7 @@ def submit_form():
 
         except requests.exceptions.RequestException as e:
             print(f"An error occurred: {e}")
+            return jsonify({"status": "error", "message": "An internal error occurred."}), 500
 
         # return jsonify({"status": "success", "message": "Data saved successfully!"})  , 200
         return jsonify(ans), 200
