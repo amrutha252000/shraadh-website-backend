@@ -35,6 +35,10 @@ except Exception as e:
     # If the app can't connect to the sheet on startup, we'll handle it gracefully
     sheet = None
 
+@app.route('/ping', methods=['GET'])
+def ping():
+    return "pong", 200
+
 @app.route('/submit', methods=['POST'])
 def submit_form():
     if not sheet:
