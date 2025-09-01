@@ -90,7 +90,13 @@ def submit_form():
             }
         } 
         
-        apiKey = "AIzaSyA00PdUAuGWu6X7IS7uIwMJcc2wmsXVZy4"
+        # Securely get the API key from an environment variable
+        apiKey = os.environ.get('GEMINI_API_KEY')
+        if not apiKey:
+            # This error will show in your server logs
+            print("CRITICAL ERROR: GEMINI_API_KEY environment variable not set.")
+            # This generic message is sent to the user
+            return jsonify({"status": "error", "message": "API service is not configured correctly."}), 500
         apiUrl = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key={apiKey}"
         # print(apiUrl)
 
